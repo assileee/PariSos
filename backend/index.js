@@ -7,6 +7,7 @@ const connectDB = require("./utils/db.js");
 const path = require("path");
 
 const userRoutes = require("./routes/users");
+const chatbotRoutes = require("./routes/chatbot");
 
 // Connect to DBs
 connectDB();
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
   );
   res.header(
     "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   );
   next();
 });
@@ -40,12 +41,35 @@ app.use((req, res, next) => {
 
 // ROUTES
 app.use("/api/users", userRoutes);
+app.use("/api/chatbot", chatbotRoutes);
 
 // Root & static
 app.get("/", (req, res) => {
-  res.send("Welcome to Mixmate!");
+  res.send("Welcome to PariSos - Your Paris Student Assistant!");
 });
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.get("/api/debug/routes", (req, res) => {
+  const routes = [];
+  app._router.stack.forEach(middleware => {
+    if (middleware.route) {
+      routes.push({
+        path: middleware.route.path,
+        methods: Object.keys(middleware.route.methods)
+      });
+    } else if (middleware.name === 'router') {
+      middleware.handle.stack.forEach(handler => {
+        if (handler.route) {
+          routes.push({
+            path: handler.route.path,
+            methods: Object.keys(handler.route.methods)
+          });
+        }
+      });
+    }
+  });
+  res.json({ routes });
+});
 
 // 404 fallback
 app.use((req, res) => {
@@ -53,5 +77,6 @@ app.use((req, res) => {
 });
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`PariSos server running on port ${port}`);
+  console.log(`Ollama integration: ${process.env.USE_OLLAMA === 'true' ? 'Enabled' : 'Mock mode'}`);
 });
