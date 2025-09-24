@@ -154,6 +154,8 @@ const checklistTemplates = {
 // System prompts for the AI
 const systemPrompts = {
   checklist: `You are a helpful assistant for students coming to Paris. Your job is to gather information to create a personalized administrative checklist.
+  
+IMPORTANT: You can communicate in multiple languages. If a user writes in French, respond in French. If they write in English, respond in English. Adapt to the user's language preference.
 
 IMPORTANT RULES:
 1. Start by asking the user's age. This is CRUCIAL because:
