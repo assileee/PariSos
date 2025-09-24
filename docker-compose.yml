@@ -19,10 +19,9 @@ services:
       - NODE_ENV=development
       - MONGO_URI=mongodb://mongodb:27017/parisos
       - SECRET_TOKEN_KEY=superUltraMegaSecretKey123
-      # Ollama Configuration (set USE_OLLAMA=true when ready)
-      - USE_OLLAMA=true  # Set to true when you have Ollama running
+      - USE_OLLAMA=true
       - OLLAMA_API_URL=http://host.docker.internal:11434/api/chat
-      - OLLAMA_MODEL=llama3.2:1b 
+      - OLLAMA_MODEL=mistral 
     depends_on:
       - mongodb
     volumes:

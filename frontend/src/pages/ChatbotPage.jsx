@@ -33,7 +33,7 @@ const ChatbotPage = () => {
     if (selectedMode === 'checklist') {
       setMessages([{
         role: 'assistant',
-        content: "Welcome! I'll help you create a personalized checklist for settling in Paris. Let me ask you a few questions:\n\n1. What's your nationality?\n2. Are you an EU citizen?\n3. What's your student status (Bachelor/Master/PhD)?\n4. Do you already have accommodation?\n5. How long will you stay in Paris?"
+        content: "Welcome! I'll help you create a personalized checklist for settling in Paris. Let's start with some important information.\n\nFirst, **how old are you?** This is important because students under 18 have different administrative procedures, especially for visa validation and opening bank accounts."
       }]);
     } else {
       setMessages([{
