@@ -46,6 +46,7 @@ const NavBar = () => {
       <div className="container-fluid">
         {!hideNav && (
           <Link className="navbar-brand d-flex align-items-center" to="/">
+            <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>🇫🇷</span>
             <i className="bi bi-geo-alt-fill me-2"></i>
             PariSos
           </Link>
